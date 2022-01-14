@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSignup } from '../../components/hooks/useSignup';
 
 import styles from '../login/Login.module.css';
 
@@ -6,10 +7,11 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const { error, isPending, signup } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password, displayName);
+    signup(email, password, displayName);
   };
   return (
     <form className={styles['login-form']} onSubmit={handleSubmit}>
@@ -38,7 +40,14 @@ const Signup = () => {
           value={password}
         />
       </label>
-      <button className="btn">Sign Up</button>
+
+      {!isPending && <button className="btn">Sign Up</button>}
+      {isPending && (
+        <button className="btn" disabled>
+          Loading
+        </button>
+      )}
+      {error && <p>{error}</p>}
     </form>
   );
 };

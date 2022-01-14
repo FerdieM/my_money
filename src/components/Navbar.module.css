@@ -17,3 +17,7 @@
   text-decoration: underline;
   color: var(--text-primary-color);
 }
+
+.navbar ul li span {
+  text-transform: capitalize;
+}

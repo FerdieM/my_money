@@ -1,6 +1,6 @@
 .login-form {
-  max-width: 98rem;
-  margin: 3rem auto;
+  max-width: 64rem;
+  margin: 4rem auto;
   font-size: 1.4rem;
 }
 
@@ -16,5 +16,5 @@
   padding: 0.8rem 0.6rem;
   font-size: 1.5rem;
   color: var(--secondary-text-color);
-  width: 80%;
+  width: 100%;
 }

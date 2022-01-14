@@ -66,6 +66,14 @@ ul {
 
 .btn:hover,
 .btn:active {
-  background-color: var(--accent-color);
+  background-color: var(--light-primary-color);
   color: var(--primary-text-color);
+}
+
+.error {
+  margin-top: 1rem;
+  padding: 1rem 1rem;
+  text-align: center;
+  background-color: var(--divider-color);
+  width: 60%;
 }

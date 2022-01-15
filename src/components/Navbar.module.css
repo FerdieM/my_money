@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  background: var(--dark-primary-color);
+  background: var(--default-primary-color);
   justify-content: space-around;
   align-items: center;
   font-size: 1.8rem;

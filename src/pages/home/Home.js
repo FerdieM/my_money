@@ -1,13 +1,28 @@
 // syles
 import styles from './Home.module.css';
+// components
 import TransactionForm from './TransactionForm';
+import TransactionList from './TransactionList';
+// hooks
+import { useAuthContext } from '../../components/hooks/useAuthContext';
+import { useCollection } from '../../components/hooks/useCollection';
 
 const Home = () => {
+  const { user } = useAuthContext();
+  const { documents, error } = useCollection('transaction', [
+    'uid',
+    '==',
+    user.uid,
+  ]);
   return (
     <div className={styles.container}>
-      <div className={styles.content}>Transaction List</div>
+      <div className={styles.content}>
+        <h3>Transactions Lists</h3>
+        {error && <p className="error">{error}</p>}
+        {documents && <TransactionList transactions={documents} />}
+      </div>
       <div className={styles.sidebar}>
-        <TransactionForm />
+        <TransactionForm uid={user.uid} />
       </div>
     </div>
   );

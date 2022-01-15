@@ -26,6 +26,14 @@ const firestoreReducer = (state, action) => {
         success: true,
       };
 
+    case 'DELETED_DOCUMENT':
+      return {
+        document: null,
+        isPending: false,
+        error: null,
+        success: true,
+      };
+
     case 'ERROR':
       return {
         document: null,
@@ -80,10 +88,31 @@ export const useFirestore = (collection) => {
         type: 'ERROR',
         payload: error.message,
       });
+      console.log(error.message);
     }
   };
 
   // delete a document
+
+  const deleteDocument = async (id) => {
+    dispatchIfNotCancelled({
+      type: 'IS_PENDING',
+    });
+
+    try {
+      await ref.doc(id).delete();
+
+      dispatchIfNotCancelled({
+        type: 'DELETED_DOCUMENT',
+      });
+    } catch (error) {
+      dispatchIfNotCancelled({
+        type: 'ERROR',
+        payload: error.message,
+      });
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     return () => {
@@ -91,5 +120,5 @@ export const useFirestore = (collection) => {
     };
   }, []);
 
-  return { addDocument, response };
+  return { addDocument, response, deleteDocument };
 };

@@ -9,11 +9,11 @@ import { useCollection } from '../../components/hooks/useCollection';
 
 const Home = () => {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection('transaction', [
-    'uid',
-    '==',
-    user.uid,
-  ]);
+  const { documents, error } = useCollection(
+    'transaction',
+    ['uid', '==', user.uid],
+    ['createAt', 'desc']
+  );
   return (
     <div className={styles.container}>
       <div className={styles.content}>
